@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "272427807852",
+    "project_id": "paprika-app-0",
+    "storage_bucket": "paprika-app-0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:272427807852:android:3f4be90d133ea2bce41449",
+        "android_client_info": {
+          "package_name": "com.paprika.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "272427807852-47g9mcmiaperg8do5q29ojm7g505im06.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6ZmjiOr7adqeloLYlEP-3pxMID3-_nlo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "272427807852-47g9mcmiaperg8do5q29ojm7g505im06.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "272427807852-a9qf34d3v1p31mamdi38ov8ppuon8v2i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.paprikaApp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:272427807852:android:944eb7e51c0e673ce41449",
+        "android_client_info": {
+          "package_name": "com.paprika.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "272427807852-47g9mcmiaperg8do5q29ojm7g505im06.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6ZmjiOr7adqeloLYlEP-3pxMID3-_nlo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "272427807852-47g9mcmiaperg8do5q29ojm7g505im06.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "272427807852-a9qf34d3v1p31mamdi38ov8ppuon8v2i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.paprikaApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
