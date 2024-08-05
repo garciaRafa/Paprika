@@ -27,6 +27,17 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  void _signInWithGoogle() async {
+    final user = await _authService.signInWithGoogle();
+    if (user != null) {
+      Navigator.pushReplacementNamed(context, '/home');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Falha no login com Google')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +68,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 backgroundColor: const Color.fromARGB(255, 135, 32, 27),
               ),
             ),
+            ElevatedButton(
+                onPressed: _signInWithGoogle,
+                child: const Text('Login com o Google')),
             TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/register');
