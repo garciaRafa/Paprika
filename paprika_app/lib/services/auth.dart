@@ -17,6 +17,18 @@ class AuthenticationService {
     }
   }
 
+// Método para criar um novo usuário com email/senha
+  Future<UserCredential> createUserWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      return await _auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+    } catch (e) {
+      print(e);
+      throw e;
+    }
+  }
+
   // Login com Google
   Future<User?> signInWithGoogle() async {
     try {

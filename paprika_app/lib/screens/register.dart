@@ -17,10 +17,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void _register() async {
     try {
-      await _authService.signInWithEmailAndPassword(
+      await _authService.createUserWithEmailAndPassword(
           _emailController.text, _passwordController.text);
-      // Navegar para a tela principal após registro bem-sucedido
-      Navigator.pushReplacementNamed(context, '/home');
+
+      // Exibir mensagem de sucesso
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Cadastro realizado com sucesso!')),
+      );
+
+      // Navegar para a tela de login após registro bem-sucedido
+      Navigator.pushReplacementNamed(context, '/login');
     } catch (e) {
       // Exibir mensagem de erro
       ScaffoldMessenger.of(context).showSnackBar(
