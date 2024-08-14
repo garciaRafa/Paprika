@@ -1,5 +1,3 @@
-// lib/screens/register.dart
-
 import 'package:flutter/material.dart';
 import 'package:paprika_app/services/auth.dart';
 
