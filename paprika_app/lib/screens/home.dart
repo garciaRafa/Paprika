@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paprika_app/screens/register_recipe_screen.dart';
+import 'package:paprika_app/screens/register_ingredients_screen.dart';
 import 'package:paprika_app/screens/search_recipe_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,11 +12,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
 
-  static const List<Widget> _widgetOptions = <Widget>[
-    Center(
-        child: Text('Bem-vindo ao Paprika!', style: TextStyle(fontSize: 24))),
-    RegisterRecipeScreen(),
-    SearchRecipeScreen(),
+  final List<Widget> _screens = [
+    const WelcomeScreen(),
+    const RegisterIngredientsScreen(),
+    const SearchRecipeScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -32,25 +31,42 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Paprika'),
         backgroundColor: const Color.fromARGB(255, 135, 32, 27),
       ),
-      body: _widgetOptions.elementAt(_selectedIndex),
+      backgroundColor: const Color(0xFFC7372F),
+      body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Início',
+            label: 'Boas-vindas',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle_outline),
-            label: 'Cadastro',
+            icon: Icon(Icons.add),
+            label: 'Cadastro de Ingredientes',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
-            label: 'Procurar',
+            label: 'Procurar Receitas',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: const Color.fromARGB(255, 135, 32, 27),
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey,
+        backgroundColor: const Color.fromARGB(255, 135, 32, 27),
         onTap: _onItemTapped,
+      ),
+    );
+  }
+}
+
+class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text(
+        'Bem-vindo ao Paprika!',
+        style: TextStyle(fontSize: 24, color: Colors.white),
       ),
     );
   }
