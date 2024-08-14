@@ -5,16 +5,10 @@ class SearchRecipeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Procurar Receitas'),
-        backgroundColor: const Color.fromARGB(255, 135, 32, 27),
-      ),
-      body: const Center(
-        child: Text(
-          'Procurar receitas com base nos ingredientes',
-          style: TextStyle(fontSize: 24),
-        ),
+    return const Center(
+      child: Text(
+        'Procurar receitas com base nos ingredientes',
+        style: TextStyle(fontSize: 24, color: Colors.white),
       ),
     );
   }
