@@ -7,7 +7,7 @@ class SpoonacularService {
 
   Future<Map<String, dynamic>> fetchData(String endpoint) async {
     final response = await http.get(
-      Uri.parse('$_baseUrl/$endpoint?apiKey=$_apiKey'),
+      Uri.parse('${_baseUrl}${endpoint}&apiKey=$_apiKey'),
     );
 
     if (response.statusCode == 200) {
