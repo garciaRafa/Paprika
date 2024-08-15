@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:paprika_app/screens/register_ingredients_screen.dart';
-import 'package:paprika_app/screens/search_recipe_screen.dart';
+import 'package:paprika_app/screens/cabinet.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,7 +14,6 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = [
     const WelcomeScreen(),
     const RegisterIngredientsScreen(),
-    const SearchRecipeScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -42,10 +40,6 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
             label: 'Cadastro de Ingredientes',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Procurar Receitas',
           ),
         ],
         currentIndex: _selectedIndex,
