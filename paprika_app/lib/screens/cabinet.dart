@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:paprika_app/services/spoonacular.dart';
 import 'package:paprika_app/services/ingredients_storage.dart';
+import 'package:paprika_app/screens/recipes_by_ingredients.dart';
 
 class RegisterIngredientsScreen extends StatefulWidget {
   const RegisterIngredientsScreen({super.key});
@@ -13,24 +14,10 @@ class RegisterIngredientsScreen extends StatefulWidget {
 class _RegisterIngredientsScreenState extends State<RegisterIngredientsScreen> {
   final TextEditingController _searchController = TextEditingController();
   final List<String> _ingredients = [];
-  final List<String> _suggestions = [];
+  final List<String> _ingredientSuggestions = [];
   final IngredientStorageService _storageService = IngredientStorageService();
-
-  // Dados mock para ingredientes
-  /*
-  final List<String> mockIngredients = [
-    'Tomato',
-    'Onion',
-    'Garlic',
-    'Basil',
-    'Oregano',
-    'Carrot',
-    'Pepper',
-    'Olive Oil',
-    'Salt',
-    'Pepper',
-  ];
-  */
+  final SpoonacularService _apiService =
+      SpoonacularService(); // Inicializando o _apiService
 
   @override
   void initState() {
@@ -62,43 +49,25 @@ class _RegisterIngredientsScreenState extends State<RegisterIngredientsScreen> {
   }
 
   void _searchIngredients(String query) async {
-    if (query.isEmpty) {
-      setState(() {
-        _suggestions.clear();
-      });
-      return;
-    }
-
-    final SpoonacularService apiService = SpoonacularService();
     try {
-      final response =
-          await apiService.fetchData('food/ingredients/search?query=$query');
-      setState(() {
-        _suggestions.clear();
-        for (var result in response['results']) {
-          _suggestions.add(result['name']);
-        }
-      });
+      final response = await _apiService
+          .fetchData('food/ingredients/search?query=$query&number=10');
+
+      // Limpando as sugestões anteriores
+      _ingredientSuggestions.clear();
+
+      // Acessando os resultados retornados pela API
+      final results = response;
+
+      for (var result in results) {
+        _ingredientSuggestions.add(result['name']);
+      }
+
+      setState(() {});
     } catch (e) {
       print('Erro ao buscar ingredientes: $e');
     }
   }
-
-  /*
-  void _searchIngredients(String query) {
-    if (query.isEmpty) {
-      setState(() {
-        _suggestions.clear();
-      });
-      return;
-    }
-
-    setState(() {
-      _suggestions.clear();
-      _suggestions.addAll(mockIngredients.where((ingredient) =>
-          ingredient.toLowerCase().contains(query.toLowerCase())));
-    });
-  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -123,9 +92,9 @@ class _RegisterIngredientsScreenState extends State<RegisterIngredientsScreen> {
             const SizedBox(height: 10),
             Expanded(
               child: ListView.builder(
-                itemCount: _suggestions.length,
+                itemCount: _ingredientSuggestions.length,
                 itemBuilder: (context, index) {
-                  final suggestion = _suggestions[index];
+                  final suggestion = _ingredientSuggestions[index];
                   return ListTile(
                     title: Text(suggestion),
                     trailing: IconButton(
@@ -155,6 +124,17 @@ class _RegisterIngredientsScreenState extends State<RegisterIngredientsScreen> {
                   );
                 },
               ),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RecipesByIngredientsScreen(),
+                  ),
+                );
+              },
+              child: const Text('Gerar Receitas'),
             ),
           ],
         ),
