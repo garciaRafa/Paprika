@@ -7,13 +7,15 @@ class SpoonacularService {
 
   Future<List<dynamic>> fetchData(String endpoint) async {
     final response = await http.get(
-      Uri.parse('${_baseUrl}${endpoint}&apiKey=$_apiKey'),
+      Uri.parse('$_baseUrl$endpoint?apiKey=$_apiKey'),
     );
 
     if (response.statusCode == 200) {
-      return jsonDecode(response.body) as List<dynamic>;
+      return jsonDecode(response.body)['recipes'] as List<dynamic>;
     } else {
+      print('Erro: ${response.statusCode}');
+      print('Resposta: ${response.body}');
       throw Exception('Falha ao carregar dados da API');
-    }
-  }
+    }
+  }
 }
