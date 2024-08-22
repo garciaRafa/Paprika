@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:paprika_app/screens/cabinet.dart';
+import 'package:paprika_app/screens/random_recipes.dart';
+import 'package:paprika_app/screens/meal_planning.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,6 +16,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = [
     const WelcomeScreen(),
     const RegisterIngredientsScreen(),
+    const RandomRecipeScreen(),
+    const MealPlannerScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -41,6 +45,11 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.add),
             label: 'Cadastro de Ingredientes',
           ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.cake), label: 'Receitas Aleatórias'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.calendar_today),
+              label: 'Planejamento de Refeições'),
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.white,
