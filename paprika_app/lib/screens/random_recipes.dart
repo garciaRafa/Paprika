@@ -1,5 +1,3 @@
-random_recipes.dart:
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:paprika_app/providers/recipe_provider.dart';
