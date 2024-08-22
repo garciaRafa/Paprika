@@ -16,6 +16,26 @@ class SpoonacularService {
       print('Erro: ${response.statusCode}');
       print('Resposta: ${response.body}');
       throw Exception('Falha ao carregar dados da API');
-    }
-  }
+    }
+  }
+
+  Future<Map<String, dynamic>> fetchMealPlan(int numberOfDays) async {
+    try {
+      final response = await http.get(
+        Uri.parse(
+            '$_baseUrl/mealplanner/generate?apiKey=$_apiKey&timeFrame=day&number=$numberOfDays'),
+      );
+
+      if (response.statusCode == 200) {
+        return jsonDecode(response.body);
+      } else {
+        print('Status Code: ${response.statusCode}');
+        print('Resposta: ${response.body}');
+        throw Exception('Falha ao carregar dados do planejamento de refeições');
+      }
+    } catch (e) {
+      print('Erro ao fazer a requisição: $e');
+      throw e;
+    }
+  }
 }
