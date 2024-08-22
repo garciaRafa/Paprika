@@ -1,26 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:paprika_app/services/spoonacular.dart';
+import 'package:provider/provider.dart';
+import 'package:paprika_app/providers/meal_planner_provider.dart';
 
-class MealPlannerScreen extends StatefulWidget {
+class MealPlannerScreen extends StatelessWidget {
   const MealPlannerScreen({super.key});
 
   @override
-  _MealPlannerScreenState createState() => _MealPlannerScreenState();
-}
-
-class _MealPlannerScreenState extends State<MealPlannerScreen> {
-  final SpoonacularService _spoonacularService = SpoonacularService();
-  Future<Map<String, dynamic>>? _mealPlan;
-  int _numberOfDays = 1;
-
-  void _generateMealPlan() {
-    setState(() {
-      _mealPlan = _spoonacularService.fetchMealPlan(_numberOfDays);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final mealPlannerProvider = Provider.of<MealPlannerProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Planejamento de Refeições'),
@@ -39,19 +27,17 @@ class _MealPlannerScreenState extends State<MealPlannerScreen> {
                   style: TextStyle(fontSize: 18, color: Colors.white),
                 ),
                 Slider(
-                  value: _numberOfDays.toDouble(),
+                  value: mealPlannerProvider.numberOfDays.toDouble(),
                   min: 1,
                   max: 7,
                   divisions: 6,
-                  label: '$_numberOfDays dias',
+                  label: '${mealPlannerProvider.numberOfDays} dias',
                   onChanged: (value) {
-                    setState(() {
-                      _numberOfDays = value.toInt();
-                    });
+                    mealPlannerProvider.setNumberOfDays(value.toInt());
                   },
                 ),
                 ElevatedButton(
-                  onPressed: _generateMealPlan,
+                  onPressed: mealPlannerProvider.generateMealPlan,
                   child: const Text('Gerar Planejamento de Refeições'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 135, 32, 27),
@@ -65,9 +51,9 @@ class _MealPlannerScreenState extends State<MealPlannerScreen> {
           ),
           Expanded(
             child: FutureBuilder<Map<String, dynamic>>(
-              future: _mealPlan,
+              future: mealPlannerProvider.mealPlan,
               builder: (context, snapshot) {
-                if (_mealPlan == null) {
+                if (mealPlannerProvider.mealPlan == null) {
                   return const Center(
                       child: Text(
                           'Clique no botão para gerar um planejamento de refeições.'));
