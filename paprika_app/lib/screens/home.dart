@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:paprika_app/screens/cabinet.dart';
+import 'package:paprika_app/screens/random_recipes.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -14,6 +15,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Widget> _screens = [
     const WelcomeScreen(),
     const RegisterIngredientsScreen(),
+    const RandomRecipeScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -41,6 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Icon(Icons.add),
             label: 'Cadastro de Ingredientes',
           ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.cake), label: 'Receitas Aleatórias')
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.white,
@@ -61,7 +65,7 @@ class WelcomeScreen extends StatelessWidget {
       child: Text(
         'Bem-vindo ao Paprika!',
         style: TextStyle(fontSize: 24, color: Colors.white),
-      ),
-    );
-  }
+      ),
+    );
+  }
 }
